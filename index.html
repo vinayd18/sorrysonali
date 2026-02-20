@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Sonali 🥺</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d63031;
+            --soft-pink: #fff0f3;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--soft-pink);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 45px rgba(214, 48, 49, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+            z-index: 10;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .hidden { display: none; visibility: hidden; }
+
+        /* --- PAGE 1: PREVIOUS LOGIC --- */
+        h1 { color: var(--primary); font-size: 1.8rem; }
+        #subtext { color: #666; margin-bottom: 20px; }
+        .btn-group { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 25px; }
+        
+        .btn {
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s ease, background 0.3s;
+            font-weight: 600;
+        }
+        .btn-yes { background: var(--primary); color: white; }
+        .btn-no { background: #eee; color: #666; }
+
+        /* --- PAGE 2: REAL HANDWRITING & 3D --- */
+        .page2-card {
+            transform: rotateY(10deg) rotateX(5deg);
+            box-shadow: -10px 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .writing-svg {
+            width: 100%;
+            height: auto;
+            max-width: 350px;
+        }
+
+        .path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw 4s ease forwards;
+            stroke: var(--primary);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        @keyframes draw {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* 3D Realistic Heart (Initially Hidden) */
+        .heart-wrapper { 
+            margin: 20px 0; 
+            opacity: 0; 
+            transform: scale(0);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .show-heart { opacity: 1; transform: scale(1); }
+
+        .realistic-heart {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            display: inline-block;
+            transform: rotate(-45deg);
+            background: radial-gradient(circle at 70% 30%, #ff4d4d, #b30000);
+            box-shadow: inset -5px -5px 15px rgba(0,0,0,0.4);
+            animation: thump 0.8s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        .realistic-heart::before, .realistic-heart::after {
+            content: ""; position: absolute; width: 60px; height: 60px; background: inherit; border-radius: 50%;
+        }
+        .realistic-heart::before { top: -30px; left: 0; }
+        .realistic-heart::after { left: 30px; top: 0; }
+
+        @keyframes thump {
+            0%, 30%, 100% { transform: scale(1) rotate(-45deg); }
+            15% { transform: scale(1.15) rotate(-45deg); }
+            45% { transform: scale(1.1) rotate(-45deg); }
+        }
+
+        /* --- PAGE 3: LETTER --- */
+        .letter-content { text-align: left; line-height: 1.6; color: #444; font-style: italic; }
+
+        .bg-heart { position: absolute; color: var(--primary); pointer-events: none; animation: float 4s linear infinite; opacity: 0.4; }
+        @keyframes float { 0% { transform: translateY(100vh); } 100% { transform: translateY(-10vh); opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <div id="page1" class="card">
+        <h1>Mujhe maaf kar de 🥺</h1>
+        <p id="subtext">Sonali, please maan ja na...</p>
+        <div class="btn-group">
+            <button id="yesBtn" class="btn btn-yes" onclick="goToPage2()">Yes</button>
+            <button id="noBtn" class="btn btn-no" onclick="shrinkNo()">No</button>
+        </div>
+    </div>
+
+    <div id="page2" class="card page2-card hidden">
+        <svg class="writing-svg" viewBox="0 0 400 100">
+            <path class="path" d="M10,50 Q30,20 50,50 T90,50 T130,50 M150,50 Q170,20 190,50 T230,50 M250,50 Q270,20 290,50 T330,50 T380,50" id="sorryPath"/>
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="'Dancing Script'" font-size="30" fill="none" stroke="#d63031" stroke-width="1" class="path">
+                I am sorry Sonali I love you
+            </text>
+        </svg>
+
+        <div id="heartWrap" class="heart-wrapper">
+            <div class="realistic-heart"></div>
+        </div>
+
+        <button id="nextBtn" class="btn btn-yes hidden" style="margin-top: 20px;" onclick="showPage(3)">Next ➔</button>
+    </div>
+
+    <div id="page3" class="card hidden">
+        <h1>For My Sonali ❤️</h1>
+        <div class="letter-content">
+            <p>Dear Sonali,</p>
+            <p>I am sorry yaar. Tujhe bhot yaad kar raha hu yaar please. Please apne bacche ko maaf kar de agli baar se aisa nahi hoga mai nahi karunga tujhe dukhi i live you please mujeh tera hasta hua chehra dekhna hai tujhse baat karni hai mai tadap raha hu yaar tere bina please mujh se baat kar mujhe saza mat de mai tere bina nahi reh paunga ek sec bhi meri aankhein tujhe hi dekhti hai mera mann tujhe hi sochta hai please maan ja na. </p>
+            <p style="text-align: right; margin-top: 20px;"><b>Aapka pati🥹 <br>Vinay....</b></p>
+        </div>
+    </div>
+
+    <script>
+        let noScale = 1;
+        let yesScale = 1;
+
+        function shrinkNo() {
+            noScale -= 0.15;
+            yesScale += 0.2;
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+            const subtext = document.getElementById('subtext');
+
+            if (noScale <= 0.2) {
+                noBtn.style.display = 'none';
+            } else {
+                noBtn.style.transform = `scale(${noScale})`;
+            }
+            
+            yesBtn.style.transform = `scale(${yesScale})`;
+            subtext.innerHTML = "<b>Apne bacche ko maaf kar de na! 🥺</b>";
+        }
+
+        function goToPage2() {
+            showPage(2);
+            // Wait for text animation (4s) then show heart
+            setTimeout(() => {
+                document.getElementById('heartWrap').classList.add('show-heart');
+                document.getElementById('nextBtn').classList.remove('hidden');
+                document.getElementById('nextBtn').style.visibility = 'visible';
+            }, 3500);
+        }
+
+        function showPage(num) {
+            document.querySelectorAll('.card').forEach(c => {
+                c.classList.add('hidden');
+                c.style.visibility = 'hidden';
+            });
+            const next = document.getElementById('page' + num);
+            next.classList.remove('hidden');
+            next.style.visibility = 'visible';
+        }
+
+        // Floating Hearts
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.classList.add('bg-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }, 500);
+    </script>
+</body>
+</html>
